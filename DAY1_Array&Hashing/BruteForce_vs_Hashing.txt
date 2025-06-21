@@ -17,15 +17,18 @@ You open every drawer one by one to check.
 👉 That is Brute Force.
 
 🔸 C++ Example: Two Sum (Brute Force)
-bool hasPairWithSum(vector<int>& arr, int target) {
-    for (int i = 0; i < arr.size(); ++i) {
-        for (int j = i + 1; j < arr.size(); ++j) {
-            if (arr[i] + arr[j] == target)
-                return true;
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        for (int i = 0; i < nums.size(); ++i) {
+            for (int j = i + 1; j < nums.size(); ++j) {
+                if (nums[i] + nums[j] == target)
+                    return {i, j};
+            }
         }
+        return {}; 
     }
-    return false;
-}
+};
 
 🕒 Time Complexity: O(n²)
 🧠 Easy to write, but slow for large inputs.
@@ -49,14 +52,19 @@ Instead, you type their roll number in a system and get the result instantly.
 👉 That is Hashing.
 
 🔸 C++ Example: Two Sum (Hashing)
-bool hasPairWithSum(vector<int>& arr, int target) {
-    unordered_set<int> s;
-    for (int x : arr) {
-        if (s.count(target - x)) return true;
-        s.insert(x);
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> seen; 
+        for (int i = 0; i < nums.size(); ++i) {
+        	int req = target - nums[i];
+            if (seen.count(req))
+                return {seen[req], i};
+        seen[nums[i]] = i;
+        }
+        return {}; 
     }
-    return false;
-}
+};
 
 🕒 Time Complexity: O(n)
 💾 Space Complexity: O(n)
